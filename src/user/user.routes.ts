@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { UserController } from "@/user/user.controller";
 import { UserModel } from "@/user/user.model";
-import { CreateUserRequestSchema, UpdateUserRequestSchema, RequiredUserID } from "@/user/user.requests";
+import { CreateUserRequestSchema, UpdateUserRequestSchema, RequiredUserIDSchema } from "@/user/user.requests";
 
 const UserRoutes = async (client: FastifyInstance, userController: UserController) => {
     client.route({
@@ -21,7 +21,7 @@ const UserRoutes = async (client: FastifyInstance, userController: UserControlle
         method: "GET",
         url: "/:id",
         schema: {
-            params: RequiredUserID,
+            params: RequiredUserIDSchema,
             response: {
                 200: UserModel,
             }
@@ -45,7 +45,7 @@ const UserRoutes = async (client: FastifyInstance, userController: UserControlle
         method: "PUT",
         url: "/:id",
         schema: {
-            params: RequiredUserID,
+            params: RequiredUserIDSchema,
             body: UpdateUserRequestSchema,
             response: {
                 200: UserModel,
@@ -58,7 +58,7 @@ const UserRoutes = async (client: FastifyInstance, userController: UserControlle
         method: "DELETE",
         url: "/:id",
         schema: {
-            params: RequiredUserID,
+            params: RequiredUserIDSchema,
             response: {
                 204: z.null().describe("No content"),
             }

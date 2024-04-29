@@ -8,7 +8,4 @@ const UserModel = z.object({
     created_at: z.date(),
 });
 
-export type User = z.infer<typeof UserModel>;
-
 export { UserModel };
-

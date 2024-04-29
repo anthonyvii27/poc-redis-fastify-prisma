@@ -16,11 +16,8 @@ const UpdateUserRequestSchema = UserModel.pick({
 
 export type UpdateUserRequest = z.infer<typeof UpdateUserRequestSchema>;
 
-const RequiredUserID = z.object({
+const RequiredUserIDSchema = z.object({
     id: z.string(),
 });
 
-export type RequiredUserID = z.infer<typeof RequiredUserID>;
-
-
-export { CreateUserRequestSchema, UpdateUserRequestSchema, RequiredUserID };
+export { CreateUserRequestSchema, UpdateUserRequestSchema, RequiredUserIDSchema };
