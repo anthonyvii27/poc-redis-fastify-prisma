@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateUser, UpdateUser } from "@/user/user.requests";
+import { CreateUserRequest, UpdateUserRequest } from "@/user/user.requests";
 
 export class UserRepository {
     constructor(private readonly prismaClient: PrismaClient) {}
@@ -16,13 +16,13 @@ export class UserRepository {
         })
     }
 
-    public async createUser({ ...user }: CreateUser) {
+    public async createUser({ ...user }: CreateUserRequest) {
         return this.prismaClient.user.create({
             data: user
         });
     }
 
-    public async updateUser(id: number, { ...user }: UpdateUser) {
+    public async updateUser(id: number, { ...user }: UpdateUserRequest) {
         return this.prismaClient.user.update({
             where: {
                 id

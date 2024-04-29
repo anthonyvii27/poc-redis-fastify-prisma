@@ -1,6 +1,6 @@
 import { UserService } from "@/user/user.service";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { CreateUser, CreateUserSchema, UpdateUser } from "@/user";
+import { CreateUserRequest, CreateUserRequestSchema, UpdateUserRequest } from "@/user";
 
 export class UserController {
     constructor(private readonly userService: UserService) {}
@@ -20,9 +20,9 @@ export class UserController {
         return reply.send(user);
     }
 
-    public async createUser(request: FastifyRequest<{ Body: CreateUser }>, reply: FastifyReply) {
+    public async createUser(request: FastifyRequest<{ Body: CreateUserRequest }>, reply: FastifyReply) {
         const data = request.body;
-        const { success: isValid } = CreateUserSchema.safeParse(data);
+        const { success: isValid } = CreateUserRequestSchema.safeParse(data);
 
         if (!isValid) {
             // TODO - Error Handler
@@ -33,7 +33,7 @@ export class UserController {
         return reply.send(user);
     }
 
-    public async updateUser(request: FastifyRequest<{ Params: { id: string }, Body: UpdateUser }>, reply: FastifyReply) {
+    public async updateUser(request: FastifyRequest<{ Params: { id: string }, Body: UpdateUserRequest }>, reply: FastifyReply) {
         const userId = parseInt(request.params.id);
         const data = request.body;
 

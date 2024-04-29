@@ -1,5 +1,5 @@
 import { UserRepository } from "@/user";
-import { CreateUser, UpdateUser } from "@/user/user.requests";
+import { CreateUserRequest, UpdateUserRequest } from "@/user/user.requests";
 
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
@@ -12,11 +12,11 @@ export class UserService {
         return this.userRepository.getUserByID(id);
     }
 
-    public async createUser({ ...user }: CreateUser) {
+    public async createUser({ ...user }: CreateUserRequest) {
         return this.userRepository.createUser(user);
     }
 
-    public async updateUser(id: number, { ...user }: UpdateUser) {
+    public async updateUser(id: number, { ...user }: UpdateUserRequest) {
         return this.userRepository.updateUser(id, user);
     }
 

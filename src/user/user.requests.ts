@@ -1,18 +1,26 @@
 import { z } from "zod";
-import { UserSchema } from "@/user/user.model";
+import { UserModel } from "@/user/user.model";
 
-const CreateUserSchema = UserSchema.pick({
+const CreateUserRequestSchema = UserModel.pick({
+    name: true,
+    email: true,
+    password: true,
+});
+
+export type CreateUserRequest = z.infer<typeof CreateUserRequestSchema>;
+
+const UpdateUserRequestSchema = UserModel.pick({
     name: true,
     email: true
 });
 
-export type CreateUser = z.infer<typeof CreateUserSchema>;
+export type UpdateUserRequest = z.infer<typeof UpdateUserRequestSchema>;
 
-const UpdateUserSchema = UserSchema.pick({
-    name: true,
-    email: true
+const RequiredUserID = z.object({
+    id: z.string(),
 });
 
-export type UpdateUser = z.infer<typeof UpdateUserSchema>;
+export type RequiredUserID = z.infer<typeof RequiredUserID>;
 
-export { CreateUserSchema, UpdateUserSchema };
+
+export { CreateUserRequestSchema, UpdateUserRequestSchema, RequiredUserID };
